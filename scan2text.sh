@@ -21,7 +21,7 @@ TEMP_DIR=./tmp/
 TXT_FILE="$TEMP_DIR""rawText"
 READ_FILE="$TEMP_DIR""readText"
 IMAGE_FILE="$TEMP_DIR""scannedImage.tiff"
-debug=1
+debug=0
 
 
 cleanall(){
@@ -40,17 +40,18 @@ sed -i -r -e 'N;s/([[:lower:]]),([[:alnum:]])/\1\, \2/' "$TXT_FILE.txt"         
 
 
 
-# scanimage --source Flatbed --mode 'True Gray' --format=tiff --contrast 20% --brightness -10% --resolution 300 > $IMAGE_FILE
-tesseract ./tmp/scanedImage.tiff $TXT_FILE -l deu
+#scanimage --source Flatbed --mode 'True Gray' --format=tiff --contrast 20% --brightness -10% --resolution 300 > $IMAGE_FILE
+scanimage -l 0 -t 0 -x 216 -y 297 --mode 'Gray' --format=tiff  --resolution 300 > $IMAGE_FILE
+tesseract $IMAGE_FILE $TXT_FILE -l deu
 cleanall
 python3 reorder.py
-{ if [ $debug == 1 ] ; then 
+##{ if [ $debug == 1 ] ; then 
     
     #cat "$READ_FILE.txt"
-    echo "---- Debug run done ---- "
-    else
-    espeak-ng -vmb-de6 -b1 -s140 -f"$READ_FILE.txt"
-fi }    
+#     echo "---- Debug run done ---- "
+#    else
+     #espeak-ng -vmb-de6 -b1 -s140 -f"$READ_FILE.txt"
+#fi }    
 
 
 
