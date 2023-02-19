@@ -1,5 +1,5 @@
 # time to wait for an input
-waitTime = 50
+waitTime = 40
 # voices 
-voice = "-vmb-de4"
-messageVoice = "-vmb-de4"
+voice = "-vmb-de6"
+messageVoice = "-vmb-de6"

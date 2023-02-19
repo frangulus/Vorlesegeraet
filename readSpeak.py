@@ -23,6 +23,7 @@ def keylogger():
     global ctlKey
     global ctlState
     global ctlRun
+    global volume
     print("starting keylogger...")
     while running:
         try:
@@ -32,8 +33,12 @@ def keylogger():
             break
         if data == key.DOWN:
             ctlKey = "Down"
+            volume = volume - 5
+            setVolume(volume)
         if data == key.UP:
             ctlKey = "Up"
+            volume = volume + 5
+            setVolume(volume)
         if data == key.RIGHT:
             ctlKey = "Forward" 
         if data == key.LEFT:
@@ -53,6 +58,15 @@ def keylogger():
         print(f"{data} - key was pressed")
 
     print("stopping keylogger...")
+
+def setVolume(volume):
+    if volume < 80 :
+        volume = 80
+    if volume > 100 :
+        volume = 100     
+    v = str(volume) + "%"
+    r = call(['amixer', '-c', '3', 'sset', 'Speaker','0', v,',',v])
+    print(v)
 
 def openFile():
     t2 = ""
@@ -100,15 +114,15 @@ def speakAllText(text):
     global ctlKey
     i= 0
     while i < len(text):
-        r = call(['espeak-ng', '-vmb-de6', '-b1', '-s140', text[i]])   
+        r = call(['espeak-ng', c.voice, '-b1', '-s140', text[i]])   
         print(i) 
         i = i + 1  
         if ctlRun == "Stop":
             i = len(text)
-            r = call(['espeak-ng', '-vmb-de5', '-b1', '-s140', m.stopReading])   
+            r = call(['espeak-ng', c.messageVoice, '-b1', '-s140', m.stopReading])   
             return()
     print(r)
-    r = call(['espeak-ng', '-vmb-de5', '-b1', '-s140', m.EndOfText ])   
+    r = call(['espeak-ng', c.messageVoice, '-b1', '-s140', m.EndOfText ])   
     return(r)
 
 def speakMessage(message):
@@ -116,7 +130,8 @@ def speakMessage(message):
     return(r)    
 
 #
-## Ask for mode teh text should speaked
+## Ask for mode the text should speaked
+#@Todo remove?
 #
 def askForMode():
     global ctlState, ctlRun
@@ -149,6 +164,7 @@ def askForRepeat():
     while ctlRepeat == 2:
         
         speakMessage(m.askForRepeat)
+        speakMessage(m.askForNext)  
         #    
         if ctlState == "StartScan":
             ctlRepeat = 0
@@ -156,7 +172,8 @@ def askForRepeat():
             ctlRepeat = 1    
     
         print(ctlRepeat, ctlState)
-        time.sleep(5)        
+        time.sleep(10)
+              
     return(ctlRepeat)
 
 
@@ -167,6 +184,9 @@ ctlKey = ""
 ctlState = "All"
 ctlRun = "" 
 ctlScanned = ""
+volume = 85
+setVolume(volume)
+speakMessage(m.greeting)
 #
 
 
@@ -184,6 +204,7 @@ def main():
         while ctlScanned == "":
             print("21", ctlState) 
             if ctlState == "StartScan":
+                speakMessage(m.waitPlease)
                 r = call(['./scan2text.sh'])
                 ctlScanned = "yes"     
             time.sleep(5)
