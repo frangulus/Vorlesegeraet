@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+# Easy reading for handicapped people - get from scanner an speak the text 
+# Main proramm file readSpeak.py 
+# V 0.1
+# Author Thomas Glaser
+# Copyright 2022-2023
+# Released under the GPL version 3 or later license.
 # 
+#
 # import essential modules - dont't change 
 from threading import Thread
 from readchar import key, readkey
@@ -33,11 +39,11 @@ def keylogger():
             break
         if data == key.DOWN:
             ctlKey = "Down"
-            volume = volume - 5
+            volume = volume - 2
             setVolume(volume)
         if data == key.UP:
             ctlKey = "Up"
-            volume = volume + 5
+            volume = volume + 2
             setVolume(volume)
         if data == key.RIGHT:
             ctlKey = "Forward" 
@@ -166,13 +172,14 @@ def askForRepeat():
         speakMessage(m.askForRepeat)
         speakMessage(m.askForNext)  
         #    
+        time.sleep(10)
         if ctlState == "StartScan":
             ctlRepeat = 0
         if ctlRun == "Start":
             ctlRepeat = 1    
     
         print(ctlRepeat, ctlState)
-        time.sleep(10)
+        
               
     return(ctlRepeat)
 
