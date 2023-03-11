@@ -13,10 +13,10 @@ Einschränkungen erkannt werden.
 #### Die Tastatur als zentrales Element
 Ich verwendete die vorhandene Tastatur, es sollte allerdings möglich sein per 3D-Druck, etc. eine solche zu bauen.
 
-##### Tasten
-1. eine runde Taste zum Starten eines Vorgangs
-2. eine quadratische Taste zum Unterbrechen, bzw. Wiederholen
-3. zwei dreieckige Tasten zur Regelung der Lautstärke, eine mit der Spitze nach oben (lauter), die andere nach unten(leiser)    
+##### Tasten (siehe Folder documenation)
+1. eine runde Taste (-) zum Starten eines Vorgangs
+2. eine quadratische Taste (+) zum Unterbrechen, bzw. Wiederholen
+3. zwei dreieckige Tasten (PgUp and PgDown) zur Regelung der Lautstärke, eine mit der Spitze nach oben (lauter), die andere nach unten(leiser)    
 
 
 ### Die notwendigen Komponenten:
