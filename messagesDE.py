@@ -1,6 +1,11 @@
 # Menu
-# from readSpeak import askForMode
-
+# # Easy reading for handicapped people - get from scanner an speak the text 
+# Text for messages 
+# V 0.1
+# Author Thomas Glaser
+# Copyright 2022-2023
+# Released under the GPL version 3 or later license.
+# 
 
 askForModeLines = "Ich werde den Text Zeile für Zeile für Dich vorlesen. Willst Du den ganzen Text am Stück vorgelesen haben, dann drücke jetzt die runde Taste. "
 askForModeAll = "Ich werde den Text am Stück für Dich vorlesen. Willst Du den Text Zeile für Zeile vorgelesen haben, dann drücke jetzt die runde Taste. " 
